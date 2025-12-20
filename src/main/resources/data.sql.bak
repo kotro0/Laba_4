@@ -1,0 +1,69 @@
+-- =============================================
+-- ТЕСТОВЫЕ ДАННЫЕ ДЛЯ CONFERENCE MANAGEMENT SYSTEM
+-- =============================================
+-- Файл выполнится ПОСЛЕ создания таблиц через JPA
+-- Уберите DELETE и ALTER TABLE statements
+
+-- =============================================
+-- СПИКЕРЫ (Speakers)
+-- =============================================
+INSERT INTO speakers (id, name, email, bio, company, specialization) VALUES
+(1, 'Иван Петров', 'ivan.petrov@example.com', 'Senior Java Developer с 10+ лет опыта. Эксперт в Spring Framework и микросервисной архитектуре.', 'Google', 'Spring Boot, Microservices, Cloud'),
+(2, 'Анна Сидорова', 'anna.sidorova@example.com', 'Архитектор высоконагруженных систем. Более 8 лет опыта в проектировании scalable систем.', 'Yandex', 'System Design, Performance, Kubernetes'),
+(3, 'Алексей Иванов', 'alexey.ivanov@example.com', 'Специалист по кибербезопасности. Сертифицированный этичный хакер (CEH).', 'VK', 'Security, OAuth2, JWT'),
+(4, 'Мария Козлова', 'maria.kozлова@example.com', 'Data Scientist с фокусом на машинном обучении и больших данных.', 'Tinkoff', 'Machine Learning, Python, Data Analysis'),
+(5, 'Дмитрий Смирнов', 'dmitry.smirnov@example.com', 'DevOps инженер с опытом работы в крупных fintech проектах.', 'SberTech', 'Docker, Kubernetes, CI/CD');
+
+-- =============================================
+-- СОБЫТИЯ (Events)
+-- =============================================
+INSERT INTO events (id, name, description, start_date, end_date, location, max_participants) VALUES
+(1, 'Spring Conference 2024', 'Ежегодная конференция разработчиков Spring. Обсуждение последних тенденций и best practices.', '2024-05-15 09:00:00', '2024-05-17 18:00:00', 'Москва, Digital October', 500),
+(2, 'Java Summit 2024', 'Крупнейшая Java конференция в России. Сбор лучших Java разработчиков страны.', '2024-06-10 10:00:00', '2024-06-12 17:00:00', 'Санкт-Петербург, Экспофорум', 800),
+(3, 'AI & Data Science Conference', 'Конференция по искусственному интеллекту и data science. Практические кейсы и исследования.', '2024-07-20 09:00:00', '2024-07-22 17:00:00', 'Казань, IT-Park', 300),
+(4, 'DevOps Days 2024', 'Конференция для DevOps инженеров. Инфраструктура, автоматизация и мониторинг.', '2024-09-05 10:00:00', '2024-09-06 18:00:00', 'Новосибирск, Экспоцентр', 400);
+
+-- =============================================
+-- СЕССИИ (Sessions)
+-- =============================================
+-- Событие 1: Spring Conference 2024
+INSERT INTO sessions (id, title, description, start_time, end_time, max_capacity, current_participants, event_id, speaker_id) VALUES
+(1, 'Spring Boot 3: Новые возможности', 'Подробный обзор новых функций в Spring Boot 3, миграция с версии 2.x, best practices.', '2024-05-15 10:00:00', '2024-05-15 11:30:00', 100, 0, 1, 1),
+(2, 'Микросервисы на практике', 'Реальные кейсы построения микросервисной архитектуры: от монолита к микросервисам.', '2024-05-15 12:00:00', '2024-05-15 13:30:00', 80, 0, 1, 2),
+(3, 'Безопасность в Spring приложениях', 'Лучшие практики по обеспечению безопасности: аутентификация, авторизация, защита от уязвимостей.', '2024-05-16 10:00:00', '2024-05-16 11:30:00', 120, 0, 1, 3),
+(4, 'Reactive Spring', 'Разработка реактивных приложений с использованием Spring WebFlux и Project Reactor.', '2024-05-16 14:00:00', '2024-05-16 15:30:00', 90, 0, 1, 1),
+(5, 'Тестирование Spring приложений', 'Unit, integration и end-to-end тестирование. MockMvc, Testcontainers, Spring Boot Test.', '2024-05-17 11:00:00', '2024-05-17 12:30:00', 70, 0, 1, 2);
+
+-- Событие 2: Java Summit 2024
+INSERT INTO sessions (id, title, description, start_time, end_time, max_capacity, current_participants, event_id, speaker_id) VALUES
+(6, 'Java 21: Новые функции', 'Обзор нововведений в Java 21: виртуальные потоки, pattern matching, record patterns.', '2024-06-10 11:00:00', '2024-06-10 12:30:00', 150, 0, 2, 1),
+(7, 'Оптимизация производительности Java приложений', 'Профилирование, диагностика проблем с памятью, настройка JVM.', '2024-06-10 14:00:00', '2024-06-10 15:30:00', 100, 0, 2, 2),
+(8, 'Многопоточность в Java', 'Concurrent collections, CompletableFuture, новые подходы к параллелизму.', '2024-06-11 10:00:00', '2024-06-11 11:30:00', 120, 0, 2, 1),
+(9, 'Java в облаке', 'Развертывание Java приложений в Kubernetes, service mesh, cloud-native подходы.', '2024-06-11 13:00:00', '2024-06-11 14:30:00', 90, 0, 2, 5);
+
+-- =============================================
+-- УЧАСТНИКИ (Participants)
+-- =============================================
+INSERT INTO participants (id, name, email, phone, organization) VALUES
+(1, 'Мария Сергеева', 'maria.sergeeva@example.com', '+79161234567', 'Рога и копыта'),
+(2, 'Дмитрий Кузнецов', 'dmitry.kuznetsov@example.com', '+79031234568', 'ООО Технологии'),
+(3, 'Елена Васнецова', 'elena.vasnetsova@example.com', '+79261234569', 'ИТ-Академия');
+
+-- =============================================
+-- РЕГИСТРАЦИИ (Registrations)
+-- =============================================
+-- Участник 1 регистрируется на несколько сессий
+INSERT INTO registrations (id, registration_date, status, participant_id, session_id) VALUES
+(1, '2024-04-01 10:00:00', 'CONFIRMED', 1, 1),
+(2, '2024-04-01 11:00:00', 'CONFIRMED', 1, 3),
+(3, '2024-04-01 12:00:00', 'PENDING', 1, 5);
+
+-- Участник 2
+INSERT INTO registrations (id, registration_date, status, participant_id, session_id) VALUES
+(4, '2024-04-02 09:00:00', 'CONFIRMED', 2, 1),
+(5, '2024-04-02 10:00:00', 'CONFIRMED', 2, 6);
+
+-- Участник 3
+INSERT INTO registrations (id, registration_date, status, participant_id, session_id) VALUES
+(7, '2024-04-03 14:00:00', 'CONFIRMED', 3, 4),
+(8, '2024-04-03 15:00:00', 'CANCELLED', 3, 7);
